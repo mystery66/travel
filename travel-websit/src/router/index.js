@@ -13,6 +13,14 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/index'
+    },
+    {
+      path: '/travels-record',
+      redirect: '/index' 
+    },
+    {
+      path: '/index',
       name: '首页',
       component: Index
     },
@@ -34,7 +42,12 @@ export default new Router({
     {
       path: '/strategy',
       name: '旅游攻略',
-      component: Strategy
+      component: Strategy,
+      // children: [
+      //   {
+          
+      //   }
+      // ]
     }
   ]
 })

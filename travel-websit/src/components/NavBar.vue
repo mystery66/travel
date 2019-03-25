@@ -1,15 +1,16 @@
 <template>
   <div class="navBar">
     <el-menu 
-      :default-active="activeIndex" 
+      :default-active="$route.path" 
       class="el-menu-demo" 
       mode="horizontal" 
-      @select="handleSelect">
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="2">景点大全</el-menu-item>
-      <el-menu-item index="3" >美食</el-menu-item>
-      <el-menu-item index="4" >旅游摄影</el-menu-item>
-      <el-menu-item index="5">旅游攻略</el-menu-item>
+      @select="handleSelect"
+      active-text-color='#409EFF'>
+      <el-menu-item index="/index">首页</el-menu-item>
+      <el-menu-item index="/scenic">景点大全</el-menu-item>
+      <el-menu-item index="/foods" >美食</el-menu-item>
+      <el-menu-item index="/photography">旅游摄影</el-menu-item>
+      <el-menu-item index="/strategy">旅游攻略</el-menu-item>
      
     </el-menu>
     <el-input
@@ -35,29 +36,27 @@ export default {
   data () {
     return {
       selected: '',
-      activeIndex: '1',
-      input: '',
+      input: ''
     }
   },
-
   methods: {
     handleSelect(key, keyPath) {
       switch (key) {
-      case '1':
-      this.selected = '首页';
-      break;
-        case '2':
-      this.selected = '景点大全';
-      break;
-        case '3':
-      this.selected = '美食';
-      break;
-        case '4':
-      this.selected = '旅游摄影';
-      break;
-      case '5':
-      this.selected = '旅游攻略';
-      break;
+        case '/index':
+          this.selected = '首页';
+        break;
+        case '/scenic':
+          this.selected = '景点大全';
+        break;
+        case '/foods':
+          this.selected = '美食';
+        break;
+        case '/photography':
+          this.selected = '旅游摄影';
+        break;
+        case '/strategy':
+          this.selected = '旅游攻略';
+        break;
       }
       this.$router.push({
         name: this.selected
