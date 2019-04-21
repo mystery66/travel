@@ -7,17 +7,14 @@
       <a herf="#travels-record">
         <right-slide :record="record"></right-slide>
       </a>
-      <div class="block">
-        <el-pagination
-          background
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page.sync="currentPage"
-          layout="total, prev, pager, next"
-          :page-size = "pageSize"
-          :total="totalNum">
-       </el-pagination>
-      </div>
+      <pagination
+        from="index" 
+        :pageSize="pageSize" 
+        :totalNum="totalNum"
+        :lists = "records" 
+        v-on:getList="getList">
+      </pagination>
+      
     </div>
     
   </div>
@@ -25,38 +22,34 @@
 <script>
 import LeftSlide from'./leftSlide';
 import RightSlide from './rightSlide';
+import Pagination from '@/common/pagination'
 import { getRecord } from '@/api/data.js';
 import { getRecommend } from '@/api/data.js';
 export default {
   components: {
     LeftSlide,
-    RightSlide
+    RightSlide,
+    Pagination
   },
   data() {
     return {
       records: [],
       record: [],
       recommend: null,
-      currentPage: 1,
       totalNum: 0,
       pageSize: 6,
     }
   },
-  created() {
-    getRecord().then(res => {
+  async created() {
+    await getRecord().then(res => {
       this.records = res.data.data.record;
       this.totalNum = this.records.length;
       this.record = this.records.slice(0,this.pageSize);
-     
     })
   },
   methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-      },
-    handleCurrentChange(val) {
-      this.record = this.records.slice((val - 1) * this.pageSize,val * this.pageSize);
-      window.location.hash = "#travels-record";
+    getList(list) {
+      this.record = list;
     }
   },
 }
@@ -74,14 +67,6 @@ export default {
   .travels-record {
     width: 6.225rem;
   }
-  .block {
-    padding: .1rem 0;
-    float: right;
-  }
-  .number.active {
-    background-color: #ff9d00 !important;
-  }
-  .number:hover {
-    color:  #ff9d00 !important;
-  }
+ 
+  
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-carousel indicator-position="none" height="4.5355rem">
+    <el-carousel indicator-position="none" :height="height" :arrow="arrow">
       <el-carousel-item v-for="(item,index) in swiper" :key="index">
         <img :src="item.img"/>
         <div class="date">
@@ -13,18 +13,19 @@
   </div>
 </template>
 <script>
-import { getSwiper } from '@/api/data.js'
+// import { getSwiper } from '@/api/data.js'
 export default {
+  props: ["height","swiper","arrow"],
   data() {
     return {
-      swiper: ''
+      // swiper: ''
     }
   },
-  created() {
-    getSwiper().then(res => {
-      this.swiper = res.data.data.swiper;
-    })
-  }
+  // created() {
+  //   getSwiper().then(res => {
+  //     this.swiper = res.data.data.swiper;
+  //   })
+  // }
 }
 
 </script>

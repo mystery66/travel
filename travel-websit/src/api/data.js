@@ -10,7 +10,18 @@ export function getRecommend() {
   const url = host + '/swiper'
   return axios.get(url)
 }
+
 export function getRecord() {
   const url = host + '/index/record'
+  return axios.get(url)
+}
+
+export function getPhotography() {
+  const url = host + '/photography'
+  return axios.get(url)
+}
+
+export function getBanner() {
+  const url = host + '/scenic/banner'
   return axios.get(url)
 }
